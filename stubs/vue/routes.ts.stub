@@ -1,0 +1,17 @@
+import { RouteRecordRaw } from 'vue-router';
+
+const routes: RouteRecordRaw[] = [
+    {
+        path: '{{name}}s',
+        component: () => import('../../layout/Wrapper.vue'),
+        children: [
+            { path: '', component: () => import('./Index.vue') },
+            {
+                path: ':{{name}}',
+                component: () => import('./Show.vue'),
+            },
+        ],
+    },
+];
+
+export { routes };

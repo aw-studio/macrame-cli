@@ -1,0 +1,24 @@
+import { useForm } from '@macramejs/macrame-vue3';
+import { load{{Name}}, updateOrCreate{{Name}} } from './api';
+import { {{Name}}Form } from './types';
+
+export type Use{{Name}}Form = () => {{Name}}Form;
+
+const use{{Name}}Form = () => {
+    return useForm({
+        data: {
+            // ..
+        },
+        submit: (data, id) => updateOrCreate{{Name}}(data, id),
+        load: id => load{{Name}}(id),
+        // transform: data => {
+        //     return {
+        //         ...data,
+        //     };
+        // },
+    });
+};
+
+const {{name}}Form = use{{Name}}Form();
+
+export { use{{Name}}Form, {{name}}Form };

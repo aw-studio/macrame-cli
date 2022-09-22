@@ -1,0 +1,31 @@
+import { useIndex } from '@macramejs/macrame-vue3';
+import { {{Name}} } from './types';
+import { load{{Name}}s } from './api';
+import { reactive } from 'vue';
+
+export const use{{Name}}Index = () => {
+    const defaultFilter = reactive({
+        value: [],
+    });
+
+    const index = useIndex<{{Name}}>({
+        load: params => {
+            return load{{Name}}s(params);
+        },
+        sortBy: [
+            {
+                key: 'id',
+                direction: 'desc',
+            },
+        ],
+        filters: {
+            default: defaultFilter,
+        },
+    });
+
+    index.reloadOnChange(index.filters);
+
+    return index;
+};
+
+export const {{name}}Index = use{{Name}}Index();

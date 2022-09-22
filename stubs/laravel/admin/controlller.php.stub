@@ -1,0 +1,90 @@
+<?php
+
+namespace Admin\Http\Controllers;
+
+use Admin\Http\Indexes\{{Name}}Index;
+use Admin\Http\Resources\{{Name}}Resource;
+use Admin\Http\Resources\StoredResource;
+use App\Models\{{Name}};
+use Illuminate\Http\Request;
+
+class {{Name}}Controller
+{
+    /**
+     * {{Name}} index page.
+     *
+     * @param Request $request,
+     * @param {{Name}}Index $index
+     *
+     * @return \Illuminate\Http\Resources\Json\ResourceCollection
+     */
+    public function index(Request $request, {{Name}}Index $index)
+    {
+        return $index->items(
+            $request,
+            {{Name}}::query()
+        );
+    }
+
+    /**
+     * Show the {{Name}}.
+     *
+     * @param  {{Name}}         $block
+     * @return {{Name}}Resource
+     */
+    public function show({{Name}} $block)
+    {
+        return {{Name}}Resource::make($block);
+    }
+
+    /**
+     * Update the {{Name}}.
+     *
+     * @param  Request       $request
+     * @param  {{Name}}         $block
+     * @return {{Name}}Resource
+     */
+    public function update(Request $request, {{Name}} $block)
+    {
+        $validated = $request->validate([
+            'title'    => 'required|string',
+        ]);
+
+        $block->update($validated);
+
+        return {{Name}}Resource::make($block);
+    }
+
+    /**
+     * Store a new {{Name}}.
+     *
+     * @param  Request       $request
+     * @return {{Name}}Resource
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string',
+        ]);
+
+        $block = {{Name}}::make($validated);
+
+        $block->save();
+
+        return new StoredResource($block);
+    }
+
+    /**
+     * Destroy the given {{Name}}.
+     *
+     * @param  Request $request
+     * @param  {{Name}}   $block
+     * @return void
+     */
+    public function destroy(Request $request, {{Name}} $block)
+    {
+        $block->delete();
+
+        return response()->noContent();
+    }
+}

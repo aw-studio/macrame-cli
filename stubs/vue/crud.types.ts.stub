@@ -1,0 +1,19 @@
+import { IndexResource, Form } from '@macramejs/macrame-vue3';
+import type { Resource, CollectionResource } from '@/types'
+
+// {{Name}}
+export interface {{Name}} {
+    id: number;
+    // title: string;
+}
+
+export type {{Name}}Resource = Resource<{{Name}}>;
+export type {{Name}}CollectionResource = CollectionResource<{{Name}}>;
+export type {{Name}}IndexResource = IndexResource<{{Name}}>;
+
+
+export type {{Name}}FormData = {
+    // title: string;
+};
+
+export type {{Name}}Form = Form<{{Name}}FormData, {{Name}}Resource>;

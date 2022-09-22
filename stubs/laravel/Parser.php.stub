@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Casts\Parsers;
+
+use Macrame\Content\Contracts\Parser;
+
+class {{Name}}Parser implements Parser
+{
+
+    /**
+     * Create new {{Name}} Parser instance.
+     *
+     * @param  array $value
+     * @return void
+     */
+    public function __construct(
+        protected array $value
+    ) {
+        //
+    }
+
+    public function parse()
+    {
+
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array<TKey, TValue>
+     */
+    public function toArray()
+    {
+        return array_merge($this->value,[
+            //..
+        ]);
+    }
+}

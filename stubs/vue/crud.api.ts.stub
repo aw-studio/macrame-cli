@@ -1,0 +1,25 @@
+import {
+    {{Name}}FormData,
+    {{Name}}IndexResource,
+    {{Name}}Resource,
+} from './types';
+
+import { client, LoadOne, LoadMany, UpdateOrCreate, Delete } from '@/modules/api';
+
+const load{{Name}}: LoadOne<{{Name}}Resource> = id =>
+    client.get(`{{name}}s/${id}`);
+
+const load{{Name}}s: LoadMany<{{Name}}IndexResource> = params =>
+    client.get(`{{name}}s`, { params });
+
+const updateOrCreate{{Name}}: UpdateOrCreate<{{Name}}FormData> = (
+    data,
+    id = undefined
+) =>
+    id
+        ? client.put(`{{name}}s/${id}`, data)
+        : client.post(`{{name}}s`, data);
+
+const delete{{Name}}: Delete = id => client.delete(`{{name}}s/${id}`);
+
+export { load{{Name}}, load{{Name}}s, updateOrCreate{{Name}},delete{{Name}} };

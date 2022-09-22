@@ -1,0 +1,82 @@
+<template>
+    <Main v-if="show">
+        <Topbar>
+            <div class="font-semibold">
+                {{ {{name}}Form.id }}
+            </div>
+            <div class="flex items-center space-x-4">
+                <SaveButton
+                    @save="save()"
+                    :disabled="!{{name}}Form.isDirty"
+                    :busy="busy"
+                >
+                    {{ $t('pages.save') }}
+                </SaveButton>
+            </div>
+        </Topbar>
+        <MainBody>
+            <MainContent>
+                <Card>
+                    {{Name}}
+                </Card>
+                <div class="mt-4">
+                    <Button secondary @click="del"> {{Name}} löschen. </Button>
+                </div>
+            </MainContent>
+        </MainBody>
+    </Main>
+</template>
+
+<script lang="ts" setup>
+import {
+    delete{{Name}},
+    {{name}}Form,
+} from '@/entities';
+import {
+    Main,
+    MainBody,
+    MainContent,
+} from '@/layout';
+import { onBeforeMount, computed, onMounted, ref } from 'vue';
+import Topbar from '@/layout/components/Topbar.vue';
+import { useRoute, useRouter } from 'vue-router';
+import SaveButton from '@/modules/save/SaveButton.vue';
+import { Card, Button, Select } from '@/ui';
+import IconLabelOutlineVue from '@/ui/Icons/IconLabelOutline.vue';
+
+const show = ref<boolean>(false);
+
+const route = useRoute();
+const router = useRouter();
+
+onMounted(() => {
+    let id = parseInt(route.params.{{name}} as string);
+
+    {{name}}Form.load(id).then(() => {
+        show.value = true;
+    });
+});
+
+const busy = ref<boolean>(false);
+
+const save = async () => {
+    busy.value = true;
+    await {{name}}Form.submit();
+    busy.value = false;
+};
+
+const del = () => {
+    let id = parseInt(route.params.{{name}} as string);
+
+    if (
+        confirm(
+            `Bist du sicher, dass {{Name}} ID "${{{name}}Form.id}" gelöscht werden soll?`
+        )
+    ) {
+        delete{{Name}}(id).then(response => {
+            router.push(`/{{name}}s/`);
+        });
+    }
+};
+
+</script>

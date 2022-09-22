@@ -1,0 +1,75 @@
+<template>
+    <Main>
+        <Topbar>
+            <div class="font-semibold">{{Name}}</div>
+            <Add{{Name}}Modal />
+        </Topbar>
+        <MainBody>
+            <MainContent>
+                <Index :table="{{name}}Index" :busy="{{name}}Index.isLoading">
+                    <Table :table="({{name}}Index as any)">
+                        <template v-slot:thead>
+                            <Tr>
+                                <Th>ID</Th>
+                            </Tr>
+                        </template>
+                        <template v-slot:tbody>
+                            <Tr
+                                v-for="item in {{name}}Index.items"
+                                :link="`/{{name}}s/${item.id}`"
+                                :key="item.id"
+                            >
+                                <Td>
+                                    {{ item.id }}
+                                </Td>
+                            </Tr>
+                        </template>
+                    </Table>
+                </Index>
+            </MainContent>
+            <MainSidebar title="Filter" v-model:open="isOpen">
+                <template v-slot:icon>
+                    <IconInputSearch class="w-4 h-4" />
+                </template>
+                <MainSidebarSection title="Suche">
+                    <Input v-model.debounce="{{name}}Index.search" />
+                    <div v-if="{{name}}Index.search">
+                        {{ {{name}}Index.meta.total }} Treffer
+                    </div>
+                </MainSidebarSection>
+            </MainSidebar>
+        </MainBody>
+    </Main>
+</template>
+
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { {{name}}Index, isAdmin } from '@/entities';
+import {
+    Main,
+    MainBody,
+    MainContent,
+    MainSidebar,
+    MainSidebarSection,
+} from '@/layout';
+import Topbar from '@/layout/components/Topbar.vue';
+import {
+    Index,
+    Table,
+    Tr,
+    Td,
+    Th,
+    Input,
+} from '@/ui';
+import Add{{Name}}Modal from './components/Add{{Name}}Modal.vue';
+import IconInputSearch from '@/ui/Icons/IconInputSearch.vue';
+
+const route = useRoute();
+
+onMounted(() => {
+    {{name}}Index.setPage((route.query.page || 1) as number);
+});
+
+const isOpen = ref(true);
+</script>

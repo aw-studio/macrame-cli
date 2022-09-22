@@ -1,0 +1,43 @@
+<template>
+    <slot name="button" :open="() => (isOpen = true)">
+        <Button @click="isOpen = true"> Neue {{Name}} </Button>
+    </slot>
+    <Modal lg v-model:open="isOpen" title="Neue {{Name}}">
+        <form @submit.prevent="submit">
+            <div class="space-y-3">
+                <FormField noLabel :errors="form.errors.title">
+                    <Input
+                        label="Überschrift"
+                        v-model="form.title"
+                        :errors="form.title"
+                    />
+                </FormField>
+            </div>
+            <input type="submit" class="hidden" />
+        </form>
+        <template v-slot:footer>
+            <Button @click="submit"> {{Name}} anlegen </Button>
+        </template>
+    </Modal>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { Modal, Input, Button, FormField } from '@/ui';
+import { use{{Name}}Form } from '@/entities';
+import { useRouter } from 'vue-router';
+
+const isOpen = ref<boolean>(false);
+
+const form = use{{Name}}Form();
+
+const router = useRouter();
+
+const submit = () => {
+    form.submit().then(response => {
+        router.push(`/{{name}}s/${response.data.data.id}`);
+
+        isOpen.value = false;
+    });
+};
+</script>
