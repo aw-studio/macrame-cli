@@ -1,5 +1,12 @@
 # Macrame CLI
 
+## Installation
+
+```sh
+composer global require aw-studio/macrame-cli
+```
+
+
 ## CRUDs
 To create the required files for a new CRUD run the following commands in both of the Macrame project folders:
 ```sh
