@@ -23,7 +23,7 @@ class {{Name}}Resource extends JsonResource
      * @param  \Illuminate\Http\Request                                        $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function value($request)
+    public function toArray($request)
     {
         return parent::toArray($request);
     }

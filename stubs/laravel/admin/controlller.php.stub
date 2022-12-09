@@ -29,30 +29,30 @@ class {{Name}}Controller
     /**
      * Show the {{Name}}.
      *
-     * @param  {{Name}}         $block
+     * @param  {{Name}}         ${{name}}
      * @return {{Name}}Resource
      */
-    public function show({{Name}} $block)
+    public function show({{Name}} ${{name}})
     {
-        return {{Name}}Resource::make($block);
+        return {{Name}}Resource::make(${{name}});
     }
 
     /**
      * Update the {{Name}}.
      *
      * @param  Request       $request
-     * @param  {{Name}}         $block
+     * @param  {{Name}}         ${{name}}
      * @return {{Name}}Resource
      */
-    public function update(Request $request, {{Name}} $block)
+    public function update(Request $request, {{Name}} ${{name}})
     {
         $validated = $request->validate([
             'title'    => 'required|string',
         ]);
 
-        $block->update($validated);
+        ${{name}}->update($validated);
 
-        return {{Name}}Resource::make($block);
+        return {{Name}}Resource::make(${{name}});
     }
 
     /**
@@ -67,23 +67,23 @@ class {{Name}}Controller
             'title' => 'required|string',
         ]);
 
-        $block = {{Name}}::make($validated);
+        ${{name}} = {{Name}}::make($validated);
 
-        $block->save();
+        ${{name}}->save();
 
-        return new StoredResource($block);
+        return new StoredResource(${{name}});
     }
 
     /**
      * Destroy the given {{Name}}.
      *
      * @param  Request $request
-     * @param  {{Name}}   $block
+     * @param  {{Name}}   ${{name}}
      * @return void
      */
-    public function destroy(Request $request, {{Name}} $block)
+    public function destroy(Request $request, {{Name}} ${{name}})
     {
-        $block->delete();
+        ${{name}}->delete();
 
         return response()->noContent();
     }

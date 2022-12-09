@@ -76,6 +76,8 @@ class MakeVueCrudAction extends BaseMakeAction
         }
 
         $this->registerRoutes();
+
+        $this->command->info('Vue CRUD files created.');
     }
 
     protected function registerEnitityFile($file)

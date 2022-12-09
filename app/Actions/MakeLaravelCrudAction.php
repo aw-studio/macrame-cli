@@ -54,6 +54,7 @@ class MakeLaravelCrudAction extends BaseMakeAction
 
         $this->registerRoutes();
 
+        $this->command->info('Laravel CRUD files created.');
     }
 
        protected function registerRoutes()

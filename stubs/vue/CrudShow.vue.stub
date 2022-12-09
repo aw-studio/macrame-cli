@@ -2,7 +2,7 @@
     <Main v-if="show">
         <Topbar>
             <div class="font-semibold">
-                {{ {{name}}Form.id }}
+                {{ {{name}}Id }}
             </div>
             <div class="flex items-center space-x-4">
                 <SaveButton
@@ -48,6 +48,7 @@ const show = ref<boolean>(false);
 
 const route = useRoute();
 const router = useRouter();
+const {{name}}Id = parseInt(route.params.{{name}} as string);
 
 onMounted(() => {
     let id = parseInt(route.params.{{name}} as string);
@@ -70,7 +71,7 @@ const del = () => {
 
     if (
         confirm(
-            `Bist du sicher, dass {{Name}} ID "${{{name}}Form.id}" gelöscht werden soll?`
+            `Bist du sicher, dass {{Name}} ID "${id}" gelöscht werden soll?`
         )
     ) {
         delete{{Name}}(id).then(response => {
